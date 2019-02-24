@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ABLProfilerConverter": {
+      "commandName": "Project",
+      "commandLineArgs": "profile\\profile.prof profile\\cobertura.xml"
+    }
+  }
+}
