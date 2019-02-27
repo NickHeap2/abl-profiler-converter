@@ -245,8 +245,8 @@ namespace ABLProfilerConverter
 
         private DateTime DateTimeFromProgress(string datePart, string timePart)
         {
-            string rearrangeDate = datePart; // string.Format("{0}/{1}/{2}", datePart.Substring(3, 2), datePart.Substring(0, 2), datePart.Substring(6, 4));
-            DateTime dateTime = DateTime.Parse(string.Format("{0} {1}", rearrangeDate, timePart));
+            string rearrangeDate = string.Format("{0}-{1}-{2}", datePart.Substring(6, 4), datePart.Substring(0, 2), datePart.Substring(3, 2));
+            DateTime dateTime = DateTime.Parse(string.Format("{0}T{1}", rearrangeDate, timePart));
             return dateTime;
         }
 

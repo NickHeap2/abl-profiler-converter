@@ -8,13 +8,14 @@ namespace ABLProfilerConverter
     {
         static int Main(string[] args)
         {
-            if (args.Length < 2)
+            if (args.Length < 3)
             {
-                Console.Error.WriteLine("Usage: {inputFile} {outputFile}");
+                Console.Error.WriteLine("Usage: {inputFile} {cobertura_outputFile} {genericcoverage_outputFile}");
                 return -1;
             }
             string fileName = args[0];
-            string outputFile = args[1];
+            string coberturaOutputFile = args[1];
+            string genericCoveragesonarOutputFile = args[2];
 
             if (!File.Exists(fileName))
             {
@@ -44,9 +45,13 @@ namespace ABLProfilerConverter
             analyser.Analyse(session, sources, calltree, summaryStatements);
 
             CoberturaWriter cuberturaWriter = new CoberturaWriter();
-            cuberturaWriter.WriteSession(outputFile, session, analyser.Classes, analyser.Procedurals);
+            cuberturaWriter.WriteSession(coberturaOutputFile, session, analyser.Classes, analyser.Procedurals);
+            Console.Out.WriteLine($"Wrote cobertura results to {coberturaOutputFile}.");
 
-            Console.Out.WriteLine($"Wrote results to {outputFile}.");
+            GenericCoverageWriter genericCoverageWriter = new GenericCoverageWriter();
+            genericCoverageWriter.WriteSession(genericCoveragesonarOutputFile, session, analyser.Classes, analyser.Procedurals);
+            Console.Out.WriteLine($"Wrote generic coverage results to {genericCoveragesonarOutputFile}.");
+
             return 0;
         }
     }
