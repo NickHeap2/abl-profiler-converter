@@ -52,6 +52,9 @@ namespace ABLProfilerConverter
             genericCoverageWriter.WriteSession(genericCoveragesonarOutputFile, session, analyser.Classes, analyser.Procedurals);
             Console.Out.WriteLine($"Wrote generic coverage results to {genericCoveragesonarOutputFile}.");
 
+            ConsoleWriter consoleWriter = new ConsoleWriter();
+            consoleWriter.WriteSession(session, analyser.Classes, analyser.Procedurals);
+
             return 0;
         }
     }
