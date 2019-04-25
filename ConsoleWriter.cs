@@ -204,7 +204,14 @@ namespace ABLProfilerConverter
                         }
                     }
                 }
-                consoleSummaryLine.Percentage = Math.Round(consoleSummaryLine.ExecutedLines / (consoleSummaryLine.ExecutableLines / 100.0), 2);
+                if (consoleSummaryLine.ExecutableLines == 0)
+                {
+                    consoleSummaryLine.Percentage = 100;
+                }
+                else
+                {
+                    consoleSummaryLine.Percentage = Math.Round(consoleSummaryLine.ExecutedLines / (consoleSummaryLine.ExecutableLines / 100.0), 2);
+                }
 
                 consoleSummaryLines.Add(consoleSummaryLine);
             }
@@ -247,7 +254,14 @@ namespace ABLProfilerConverter
                             }
                         }
                     }
-                    consoleSummaryLine.Percentage = Math.Round(consoleSummaryLine.ExecutedLines / (consoleSummaryLine.ExecutableLines / 100.0), 2);
+                    if (consoleSummaryLine.ExecutableLines == 0)
+                    {
+                        consoleSummaryLine.Percentage = 100;
+                    }
+                    else
+                    {
+                        consoleSummaryLine.Percentage = Math.Round(consoleSummaryLine.ExecutedLines / (consoleSummaryLine.ExecutableLines / 100.0), 2);
+                    }
 
                     consoleSummaryLines.Add(consoleSummaryLine);
 
