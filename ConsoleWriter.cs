@@ -31,9 +31,18 @@ namespace ABLProfilerConverter
                 averageSummaryLine.ExecutableLines += consoleSummaryLine.ExecutableLines;
                 averageSummaryLine.ExecutedLines += consoleSummaryLine.ExecutedLines;
             }
-            averageSummaryLine.ExecutableLines = averageSummaryLine.ExecutableLines / consoleSummaryLines.Count;
-            averageSummaryLine.ExecutedLines = averageSummaryLine.ExecutedLines / consoleSummaryLines.Count;
-            averageSummaryLine.Percentage = Math.Round(averageSummaryLine.ExecutedLines / (averageSummaryLine.ExecutableLines / 100.0), 2);
+            if (consoleSummaryLines.Count == 0)
+            {
+                averageSummaryLine.ExecutableLines = 0;
+                averageSummaryLine.ExecutedLines = 0;
+                averageSummaryLine.Percentage = 100;
+            }
+            else
+            {
+                averageSummaryLine.ExecutableLines = averageSummaryLine.ExecutableLines / consoleSummaryLines.Count;
+                averageSummaryLine.ExecutedLines = averageSummaryLine.ExecutedLines / consoleSummaryLines.Count;
+                averageSummaryLine.Percentage = Math.Round(averageSummaryLine.ExecutedLines / (averageSummaryLine.ExecutableLines / 100.0), 2);
+            }
 
             ConsoleSummaryLine totalSummaryLine = new ConsoleSummaryLine();
             totalSummaryLine.PackageName = "Total";
@@ -43,8 +52,14 @@ namespace ABLProfilerConverter
                 totalSummaryLine.ExecutableLines += consoleSummaryLine.ExecutableLines;
                 totalSummaryLine.ExecutedLines += consoleSummaryLine.ExecutedLines;
             }
-            totalSummaryLine.Percentage = Math.Round(totalSummaryLine.ExecutedLines / (totalSummaryLine.ExecutableLines / 100.0), 2);
-
+            if (totalSummaryLine.ExecutableLines == 0)
+            {
+                totalSummaryLine.Percentage = 100;
+            }
+            else
+            {
+                totalSummaryLine.Percentage = Math.Round(totalSummaryLine.ExecutedLines / (totalSummaryLine.ExecutableLines / 100.0), 2);
+            }
 
             consoleSummaryLines.Add(totalSummaryLine);
 
